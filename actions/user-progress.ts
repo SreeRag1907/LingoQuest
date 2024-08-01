@@ -29,8 +29,8 @@ export const upsertUserprogress = async (courseId: number) => {
       userName: user.firstName || "User",
       userImageSrc: user.imageUrl || "/mascot.svg",
     });
-    revalidatePath("/courses");
     revalidatePath("/learn");
+    revalidatePath("/courses");
     redirect("/learn");
   }
 
@@ -40,7 +40,7 @@ export const upsertUserprogress = async (courseId: number) => {
     userImageSrc: user.imageUrl || "/mascot.svg",
   });
 
-  revalidatePath("/courses");
   revalidatePath("/learn");
+  revalidatePath("/courses");
   redirect("/learn");
 };

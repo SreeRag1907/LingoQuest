@@ -6,7 +6,7 @@ import { useKey, useMedia } from "react-use";
 type Props = {
   onCheck: () => void;
   status: "correct" | "wrong" | "none" | "completed";
-  lessonId?: boolean;
+  lessonId?: number;
   disabled?: boolean;
 };
 

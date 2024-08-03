@@ -19,6 +19,8 @@ export const Challenge = ({
   disabled,
   type,
 }: Props) => {
+  const correctOptionId = options.find((option) => option.correct)?.id;
+
   return (
     <div
       className={cn(
@@ -41,6 +43,7 @@ export const Challenge = ({
           audioSrc={option.audioSrc}
           disabled={disabled}
           type={type}
+          isCorrect={correctOptionId === option.id}
         />
       ))}
     </div>

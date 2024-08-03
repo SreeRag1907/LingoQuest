@@ -6,7 +6,7 @@ const CoursePage = async () => {
   const userProgress = await getUserProgress();
 
   return (
-    <div className='h-ful max-w-[912px] px-3 mx-auto '>
+    <div className='h-ful max-w-[912px] px-3 mx-auto py-4 '>
       <h1 className='text-2xl font-bold text-neutral-700'>Language Courses</h1>
         <List
         courses={courses}

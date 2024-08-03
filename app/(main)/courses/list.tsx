@@ -15,20 +15,27 @@ export default function List({ courses, activeCourseId }: Props) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
 
-  const onClick = (id: number) => {
+  const onClick = async (id: number) => {
     if (pending) return;
 
     if (id === activeCourseId) {
-      return router.push("/learn");
+      router.push("/learn");
+      return;
     }
 
     startTransition(() => {
-      upsertUserprogress(id).catch(() => toast.error("Something went wrong!"));
+      upsertUserprogress(id)
+        .then(() => {
+          router.push("/learn");
+        })
+        .catch(() => {
+          toast.error("Something went wrong!");
+        });
     });
   };
 
   return (
-    <div className='pt-6 gap-4 grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]'>
+    <div className=" py-5 pt-6 gap-4 grid grid-cols-2 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]">
       {courses.map((course) => (
         <Card
           key={course.id}

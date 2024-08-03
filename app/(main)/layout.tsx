@@ -7,13 +7,17 @@ type Props = {
 
 const MainPage = ({ children }: Props) => {
   return (
-    <>
-    <MobileHeader/>
-    <Sidebar className="hidden lg:flex"/>
-      <main className='lg:pl-[256px]  h-full pt-[50px] lg:pt-0'>
-        <div className='max-w-[1056px] mx-auto pt-6 h-full'>{children}</div>
-      </main>
-    </>
+    <div className='h-screen flex flex-col'>
+      <div className='bg-green-100/70 flex-1'>
+        <MobileHeader />
+        <Sidebar className='hidden lg:flex' />
+        <main className='lg:pl-[256px] pt-[50px] lg:pt-0'>
+          <div className='max-w-[1256px] bg-white mx-auto pt-6 h-full'>
+            {children}
+          </div>
+        </main>
+      </div>
+    </div>
   );
 };
 

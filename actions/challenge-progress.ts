@@ -1,12 +1,11 @@
 "use server";
 
 import db from "@/db/drizzle";
-import { getUserProgress } from "@/db/queries";
+import { getUserProgress, getUserSubscription } from "@/db/queries";
 import { challengeProgress, challenges, userProgress } from "@/db/schema";
 import { auth } from "@clerk/nextjs/server";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { use } from "react";
 
 export const upsertChallengeProgress = async (challengeId: number) => {
   const { userId } = await auth();
@@ -16,6 +15,8 @@ export const upsertChallengeProgress = async (challengeId: number) => {
   }
 
   const currentUserProgress = await getUserProgress();
+  const userSubscription = await getUserSubscription();
+
   if (!currentUserProgress) {
     throw new Error("User progress not found");
   }
@@ -38,7 +39,11 @@ export const upsertChallengeProgress = async (challengeId: number) => {
 
   const isPractise = !!existingChallengeProgress;
 
-  if (currentUserProgress.hearts === 0 && !isPractise) {
+  if (
+    currentUserProgress.hearts === 0 &&
+    !isPractise &&
+    !userSubscription?.isActive
+  ) {
     return { error: "hearts" };
   }
 
@@ -83,6 +88,4 @@ export const upsertChallengeProgress = async (challengeId: number) => {
   revalidatePath("/quests");
   revalidatePath("/leaderboard");
   revalidatePath(`/lesson/${lessonId}`);
-
-  
 };

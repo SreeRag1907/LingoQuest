@@ -19,6 +19,7 @@ const main = async () => {
     await db.delete(schema.challenges);
     await db.delete(schema.challengeOptions);
     await db.delete(schema.challengeProgress);
+    await db.delete(schema.userSubscription);
 
     await db.insert(schema.courses).values([
       {
@@ -184,6 +185,31 @@ const main = async () => {
         audioSrc:"/es_robot.mp3",
       },
     ]);
+
+    await db.insert(schema.challenges).values([
+      {
+        id: 4,
+        lessonId: 2,
+        order: 1,
+        type: "SELECT",
+        question: 'Which one of these is "the man" ?',
+      },
+      {
+        id: 5,
+        lessonId: 2,
+        order: 2,
+        type: "ASSIST",
+        question: '"the man',
+      },
+      {
+        id: 6,
+        lessonId: 2,
+        order: 3,
+        type: "SELECT",
+        question: 'Which one of these is "the robot ?' ,
+      },
+    ]);
+
 
     console.log("Seeding finished");
   } catch (error) {

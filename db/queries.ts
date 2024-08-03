@@ -8,7 +8,8 @@ import {
   lessons,
   units,
   userProgress,
-} from "./schema";
+  userSubscription,
+} from "@/db/schema";
 
 // Fetches all courses from the database and caches the result
 export const getCourses = cache(async () => {
@@ -30,11 +31,14 @@ export const getUnits = cache(async () => {
 
   // Fetch units for the active course and include lessons with challenges and their progress
   const data = await db.query.units.findMany({
+    orderBy: (units, { asc }) => [asc(units.order)],
     where: eq(units.courseId, userProgress.activeCourseId),
     with: {
       lessons: {
+        orderBy: (lessons, { asc }) => [asc(lessons.order)],
         with: {
           challenges: {
+            orderBy: (challenges, { asc }) => [asc(challenges.order)],
             with: {
               challengeProgress: {
                 where: eq(challengeProgress.userId, userId),
@@ -50,7 +54,7 @@ export const getUnits = cache(async () => {
   const normalizedData = data.map((unit) => {
     const lessonWithCompletedStatus = unit.lessons.map((lesson) => {
       // Check if all challenges are completed
-      if(lesson.challenges.length === 0){
+      if (lesson.challenges.length === 0) {
         return { ...lesson, completed: false };
       }
       const allCompletedChallenges = lesson.challenges.every((challenge) => {
@@ -93,6 +97,16 @@ export const getUserProgress = cache(async () => {
 export const getCourseById = cache(async (courseId: number) => {
   const data = await db.query.courses.findFirst({
     where: eq(courses.id, courseId),
+    with: {
+      units: {
+        orderBy: (units, { asc }) => [asc(units.order)],
+        with: {
+          lessons: {
+            orderBy: (lessons, { asc }) => [asc(lessons.order)],
+          },
+        },
+      },
+    },
   });
 
   return data;
@@ -224,4 +238,46 @@ export const getLessonPercentage = cache(async () => {
   );
 
   return percentage;
+});
+
+const DAY_IN_MS = 86_400_000;
+export const getUserSubscription = cache(async () => {
+  const { userId } = await auth();
+  if (!userId) {
+    return null;
+  }
+  const data = await db.query.userSubscription.findFirst({
+    where: eq(userSubscription.userId, userId),
+  });
+  if (!data) return null;
+  const isActive =
+    data.stripePriceId &&
+    data.stripeCurrentPeriodEnd?.getTime()! + DAY_IN_MS > Date.now();
+
+  return {
+    ...data,
+    isActive: !!isActive,
+  };
+});
+
+
+
+export const getTopTenUsers = cache(async () => {
+  const { userId } = await auth();
+
+
+  if (!userId) {
+    return [];
+  }
+  const data = await db.query.userProgress.findMany({
+    orderBy: (userProgress, { desc }) => [desc(userProgress.points)],
+    limit: 10,
+    columns: {
+      userId: true,
+      userName: true,
+      userImageSrc: true,
+      points: true,
+    },
+  });
+  return data;
 });

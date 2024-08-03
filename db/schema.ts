@@ -1,5 +1,13 @@
 import { relations } from "drizzle-orm";
-import { boolean, integer, pgEnum, pgTable, serial, text } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  integer,
+  pgEnum,
+  pgTable,
+  serial,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 //Courses
 
@@ -98,9 +106,9 @@ export const challengeOptions = pgTable("challenge_options", {
     })
     .notNull(),
   text: text("text").notNull(),
-  correct:boolean("correct").notNull(),
-  imageSrc : text("image_src"),
-  audioSrc : text("audio_src"),
+  correct: boolean("correct").notNull(),
+  imageSrc: text("image_src"),
+  audioSrc: text("audio_src"),
 });
 
 //Challenges options Relations
@@ -114,7 +122,6 @@ export const challengeOptionsRelation = relations(
     }),
   })
 );
-
 
 //Challenges Progress
 
@@ -141,8 +148,6 @@ export const challengeProgressRelation = relations(
   })
 );
 
-
-
 //User Progress
 
 export const userProgress = pgTable("user_progress", {
@@ -164,3 +169,12 @@ export const userProgressRelations = relations(userProgress, ({ one }) => ({
     references: [courses.id],
   }),
 }));
+
+export const userSubscription = pgTable("user_subscription", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull().unique(),
+  stripeCustomerId: text("stripe_customer_id").notNull().unique(),
+  stripeSubscriptionId: text("stripe_subscription_id").notNull().unique(),
+  stripePriceId: text("stripe_price_id").notNull(),
+  stripeCurrentPeriodEnd: timestamp("stripe_cureent_period_end").notNull(),
+});

@@ -22,7 +22,7 @@ const MobileHeader: React.FC<Props> = ({
   return (
     <nav className='lg:hidden px-6 h-[50px] flex items-center bg-green-500 border-b fixed top-0 w-full z-50'>
       <MobileSidebar />
-      <div className='flex items-center justify-end gap-x-2 w-full'>
+      <div className='flex items-center justify-end bg-white rounded-xl gap-x-2 w-full'>
         <Link href='/courses'>
           <Button variant='ghost'>
             {activeCourse && (
@@ -36,8 +36,6 @@ const MobileHeader: React.FC<Props> = ({
             )}
           </Button>
         </Link>
-        <div className='bg-white rounded-xl'>
-
         <Link href='/shop'>
           <Button variant='ghost' className='text-orange-500'>
             <Image
@@ -58,7 +56,7 @@ const MobileHeader: React.FC<Props> = ({
               width={28}
               height={28}
               className='mr-2'
-              />
+            />
             {hasActiveSubscription ? (
               <InfinityIcon className='stroke-[3]' />
             ) : (
@@ -66,7 +64,6 @@ const MobileHeader: React.FC<Props> = ({
             )}
           </Button>
         </Link>
-            </div>
       </div>
     </nav>
   );

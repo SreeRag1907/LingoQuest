@@ -1,4 +1,5 @@
 import FeedWrapper from "@/components/feed-wrapper";
+import MobileHeader from "@/components/mobile-header";
 import { Promo } from "@/components/promo";
 import StickyWrapper from "@/components/sticky-wrapper";
 import { Progress } from "@/components/ui/progress";
@@ -27,10 +28,17 @@ const QuestsPage = async () => {
   const isPro = !!userSubscription?.isActive;
 
   return (
+    <>
+    <MobileHeader
+        activeCourse={userProgress.activeCourse}
+        points={userProgress.points}
+        hearts={userProgress.hearts}
+        hasActiveSubscription={isPro}
+      />
     <div className='flex flex-row-reverse gap-[48px] px-6 '>
       <StickyWrapper>
         <UserProgress
-          activeCource={userProgress.activeCourse}
+          activeCourse={userProgress.activeCourse}
           hearts={userProgress.hearts}
           points={userProgress.points}
           hasActiveSubscription={isPro}
@@ -77,6 +85,7 @@ const QuestsPage = async () => {
         </div>
       </FeedWrapper>
     </div>
+    </>
   );
 };
 

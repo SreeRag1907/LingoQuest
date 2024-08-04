@@ -45,7 +45,7 @@ const LearnPage = async () => {
   return (
     <>
       <MobileHeader
-        activeCource={userProgress.activeCourse}
+        activeCourse={userProgress.activeCourse}
         points={userProgress.points}
         hearts={userProgress.hearts}
         hasActiveSubscription={isPro}

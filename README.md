@@ -46,8 +46,8 @@
 
 ## 📸 Screenshots
 
-![Landing Page](file:///C:/Users/ADMIN/Downloads/LingoQuest.png)
-![Lesson Interface](file:///C:/Users/ADMIN/Downloads/lingoquestCourse.png)
+![Landing Page](public/LingoQuest.png)
+![Lesson Interface](public/lingoquestCourse.png)
 
 ## 📋 Setup
 

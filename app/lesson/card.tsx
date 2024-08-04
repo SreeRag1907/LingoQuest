@@ -59,7 +59,7 @@ export const Card = ({
             src={imageSrc}
             alt={text}
             layout="fill"
-            objectFit="cover"
+            objectFit="contain"
             className="rounded-lg"
           />
         </div>

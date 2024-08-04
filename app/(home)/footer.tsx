@@ -14,7 +14,7 @@ export const Footer =()=>{
                     Spanish
                 </Button>
                 <Button size="lg" variant="ghost" className="w-full">
-                    <Image src='/hr(Crotia).svg' height={32} width={40} alt="Crotia" className="mr-4 rounded-md"/>
+                    <Image src='/hr(Croatia).svg' height={32} width={40} alt="Crotia" className="mr-4 rounded-md"/>
                     Croatian
                 </Button>
                 <Button size="lg" variant="ghost" className="w-full">
@@ -22,7 +22,7 @@ export const Footer =()=>{
                     Italian
                 </Button>
                 <Button size="lg" variant="ghost" className="w-full">
-                    <Image src='/jp(Jpan).svg' height={32} width={40} alt="Japan" className="mr-4 rounded-md"/>
+                    <Image src='/jp(Japan).svg' height={32} width={40} alt="Japan" className="mr-4 rounded-md"/>
                     Japanese
                 </Button>
             </div>

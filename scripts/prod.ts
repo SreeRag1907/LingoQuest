@@ -1110,6 +1110,8 @@ const main = async () => {
         text: "la cebolla",
         audioSrc: "/es_onion.mp3",
       },
+
+      //french
       {
         challengeId: 31,
         imageSrc: "/man.svg",

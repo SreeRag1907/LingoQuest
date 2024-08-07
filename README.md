@@ -44,6 +44,10 @@
 - 🚀 Deployment
 - 📱 Mobile Responsive
 
+## Live Link
+# ![LingoQuest](https://lingo-quest.vercel.app/)
+
+
 ## 📸 Screenshots
 
 ![Landing Page](public/LingoQuest.png)

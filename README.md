@@ -45,7 +45,7 @@
 - 📱 Mobile Responsive
 
 ## Live Link
-# ![LingoQuest](https://lingo-quest.vercel.app/)
+[LingoQuest](https://lingo-quest.vercel.app)
 
 
 ## 📸 Screenshots

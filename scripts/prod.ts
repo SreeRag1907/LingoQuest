@@ -28,13 +28,14 @@ const main = async () => {
     await db.insert(schema.courses).values([
       { id: 1, title: "Spanish", imageSrc: "/es(Spain).svg" },
       { id: 2, title: "French", imageSrc: "/fr(france).svg" },
-      { id: 3, title: "Croatian", imageSrc: "/hr(Croatia).svg" },
-      { id: 4, title: "Italian", imageSrc: "/it(Italy).svg" },
+      { id: 3, title: "Italian", imageSrc: "/it(Italy).svg" },
+      { id: 5, title: "Croatian", imageSrc: "/hr(Croatia).svg" },
       { id: 5, title: "Japanese", imageSrc: "/jp(Japan).svg" },
     ]);
 
     // Insert units
     await db.insert(schema.units).values([
+      //spanish
       {
         id: 1,
         courseId: 1,
@@ -49,6 +50,9 @@ const main = async () => {
         description: "Learn some basics sentences in Spanish",
         order: 2,
       },
+
+      //french
+
       {
         id: 3,
         courseId: 2,
@@ -63,31 +67,67 @@ const main = async () => {
         description: "Learn some basics sentences in French",
         order: 2,
       },
+
+      //italian
+      
+      {
+        id: 5,
+        courseId: 3,
+        title: "Unit 1",
+        description: "Learn the basics of Italian",
+        order: 1,
+      },
+      {
+        id: 6,
+        courseId: 3,
+        title: "Unit 2",
+        description: "Learn some basics sentences in Italian",
+        order: 2,
+      },
     ]);
 
     // Insert lessons
     await db.insert(schema.lessons).values([
+      //lesson 1
       { id: 1, unitId: 1, order: 1, title: "Nouns" },
       { id: 2, unitId: 1, order: 2, title: "Basic Greetings" },
       { id: 3, unitId: 1, order: 3, title: "Additional Nouns" },
       { id: 4, unitId: 1, order: 4, title: "Fruits" },
       { id: 5, unitId: 1, order: 5, title: "Vegetables" },
+      
+      //lesson 2
+
       { id: 6, unitId: 2, order: 1, title: "Nouns" },
       { id: 7, unitId: 2, order: 2, title: "Basic Greetings" },
       { id: 8, unitId: 2, order: 3, title: "Additional Nouns" },
       { id: 9, unitId: 2, order: 4, title: "Fruits" },
       { id: 10, unitId: 2, order: 5, title: "Vegetables" },
 
+      //french lesson 1
+      
       { id: 11, unitId: 3, order: 1, title: "Nouns" },
       { id: 12, unitId: 3, order: 2, title: "Basic Greetings" },
       { id: 13, unitId: 3, order: 3, title: "Additional Nouns" },
       { id: 14, unitId: 3, order: 4, title: "Fruits" },
       { id: 15, unitId: 3, order: 5, title: "Vegetables" },
+      
+      //french lesson 2
+
       { id: 16, unitId: 4, order: 1, title: "Nouns" },
       { id: 17, unitId: 4, order: 2, title: "Basic Greetings" },
       { id: 18, unitId: 4, order: 3, title: "Additional Nouns" },
       { id: 19, unitId: 4, order: 4, title: "Fruits" },
       { id: 20, unitId: 4, order: 5, title: "Vegetables" },
+
+      //italian lesson 1
+
+      { id: 21, unitId: 4, order: 1, title: "Nouns" },
+      { id: 22, unitId: 4, order: 2, title: "Basic Greetings" },
+      { id: 23, unitId: 4, order: 3, title: "Additional Nouns" },
+      { id: 24, unitId: 4, order: 4, title: "Fruits" },
+      { id: 25, unitId: 4, order: 5, title: "Vegetables" },
+
+
     ]);
 
     // Insert challenges
